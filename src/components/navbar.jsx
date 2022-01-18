@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 
-const Navbar = () => {
+const Navbar = ({ user }) => {
   return (
     <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
       <div className="container-fluid">
@@ -38,16 +38,46 @@ const Navbar = () => {
                 Rental
               </NavLink>
             </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/register">
-                Register
-              </NavLink>
-            </li>
-            <li className="nav-item">
-              <NavLink className="nav-link" aria-current="page" to="/login">
-                Login
-              </NavLink>
-            </li>
+            {!user && (
+              <React.Fragment>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/register"
+                  >
+                    Register
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink className="nav-link" aria-current="page" to="/login">
+                    Login
+                  </NavLink>
+                </li>
+              </React.Fragment>
+            )}
+            {user && (
+              <React.Fragment>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/profile"
+                  >
+                    {user.name}
+                  </NavLink>
+                </li>
+                <li className="nav-item">
+                  <NavLink
+                    className="nav-link"
+                    aria-current="page"
+                    to="/logout"
+                  >
+                    Logout
+                  </NavLink>
+                </li>
+              </React.Fragment>
+            )}
           </ul>
         </div>
       </div>
